@@ -48,16 +48,14 @@
 
 SSP_InitTypeDef _SSPInitStruct = 
 {
-  SSP_ModeSlave,              //SSP_Mode
-    
-  10,                          //  SSP_SCR - Фактор скорости передачи данных
-  100,                        //  SSP_CPSDVSR - Предделитель тактовой частоты
-  SSP_WordLength8b,           //  SSP_WordLength - Длина кадра
-  SSP_HardwareFlowControl_SSE, // SSP_HardwareFlowControl - Аппаратное управление передачей данных
-
-  SSP_SPH_1Edge,        //  SSP_SPH  - Фаза тактового сигнала
-  SSP_SPO_Low,          //  SSP_SPO  - Полярность тактовых импульсов
-  SSP_FRF_SPI_Motorola  //  SSP_FRF  - Протокол передачи данных
+  .SSP_SCR        = 10,               //  SSP_SCR - Р¤Р°РєС‚РѕСЂ СЃРєРѕСЂРѕСЃС‚Рё РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С…
+  .SSP_CPSDVSR    = 100,              //  SSP_CPSDVSR - РџСЂРµРґРґРµР»РёС‚РµР»СЊ С‚Р°РєС‚РѕРІРѕР№ С‡Р°СЃС‚РѕС‚С‹
+  .SSP_Mode       = SSP_ModeSlave,
+  .SSP_WordLength = SSP_WordLength8b, //  SSP_WordLength - Р”Р»РёРЅР° РєР°РґСЂР°
+  .SSP_SPH        = SSP_SPH_1Edge,    //  SSP_SPH  - Р¤Р°Р·Р° С‚Р°РєС‚РѕРІРѕРіРѕ СЃРёРіРЅР°Р»Р°
+  .SSP_SPO        = SSP_SPO_Low,      //  SSP_SPO  - РџРѕР»СЏСЂРЅРѕСЃС‚СЊ С‚Р°РєС‚РѕРІС‹С… РёРјРїСѓР»СЊСЃРѕРІ
+  .SSP_FRF        = SSP_FRF_SPI_Motorola,                  // SSP_FRF  - РџСЂРѕС‚РѕРєРѕР» РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С…
+  .SSP_HardwareFlowControl = SSP_HardwareFlowControl_SSE   // SSP_HardwareFlowControl - РђРїРїР°СЂР°С‚РЅРѕРµ СѓРїСЂР°РІР»РµРЅРёРµ РїРµСЂРµРґР°С‡РµР№ РґР°РЅРЅС‹С…
 };
 
 SPI_Obj  BRD_SPIx = {
