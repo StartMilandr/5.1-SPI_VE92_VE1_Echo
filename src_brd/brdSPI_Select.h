@@ -41,36 +41,34 @@
     #define  BRD_SPI               MDR_SSP2
     
   #endif  
-
-
 #endif
 
 
 SSP_InitTypeDef _SSPInitStruct = 
 {
-  .SSP_SCR        = 10,               //  SSP_SCR - Фактор скорости передачи данных
-  .SSP_CPSDVSR    = 100,              //  SSP_CPSDVSR - Предделитель тактовой частоты
-  .SSP_Mode       = SSP_ModeSlave,
-  .SSP_WordLength = SSP_WordLength8b, //  SSP_WordLength - Длина кадра
-  .SSP_SPH        = SSP_SPH_1Edge,    //  SSP_SPH  - Фаза тактового сигнала
-  .SSP_SPO        = SSP_SPO_Low,      //  SSP_SPO  - Полярность тактовых импульсов
-  .SSP_FRF        = SSP_FRF_SPI_Motorola,                  // SSP_FRF  - Протокол передачи данных
-  .SSP_HardwareFlowControl = SSP_HardwareFlowControl_SSE   // SSP_HardwareFlowControl - Аппаратное управление передачей данных
+  .SSP_SCR        = 0,                             //  SSP_SCR - Фактор скорости передачи данных
+  .SSP_CPSDVSR    = 12,                            //  SSP_CPSDVSR - Предделитель тактовой частоты  
+  .SSP_Mode       = SSP_ModeSlave,                  //  SSP_Mode
+  .SSP_WordLength = SSP_WordLength8b,               //  SSP_WordLength - Длина кадра
+  .SSP_SPH        = SSP_SPH_1Edge,                  //  SSP_SPH  - Фаза тактового сигнала
+  .SSP_SPO        = SSP_SPO_Low,                    //  SSP_SPO  - Полярность тактовых импульсов
+  .SSP_FRF        = SSP_FRF_SPI_Motorola,           //  SSP_FRF  - Протокол передачи данных
+  .SSP_HardwareFlowControl = SSP_HardwareFlowControl_SSE // SSP_HardwareFlowControl - Аппаратное управление передачей данных
 };
 
-SPI_Obj  BRD_SPIx = {
 
+SPI_Obj  BRD_SPIx = {
   //  Pins Init
-  BRD_SPI_PORT,            //  PORTx
-  BRD_SPI_PORT_CLK,        //  Port_ClockMask 
-  BRD_SPI_PINS,            //  Port_PinsSel
-  BRD_SPI_PINS_FUNC,       //  Port_PinsFunc
-  BRD_SPI_PINS_FUNC_CLEAR, //  Port_PinsFunc_ClearMask
+  .PORTx = BRD_SPI_PORT,            //  PORTx
+  .Port_ClockMask = BRD_SPI_PORT_CLK,        //  Port_ClockMask 
+  .Port_PinsSel   = BRD_SPI_PINS,            //  Port_PinsSel
+  .Port_PinsFunc  = BRD_SPI_PINS_FUNC,       //  Port_PinsFunc
+  .Port_PinsFunc_ClearMask = BRD_SPI_PINS_FUNC_CLEAR, //  Port_PinsFunc_ClearMask
   //  SPI Init
-  BRD_SPI,                 //  SPIx
-  BRD_SPI_CLOCK,           //  SPI_ClockMask
+  .SPIx = BRD_SPI,                 //  SPIx
+  .SPI_ClockMask = BRD_SPI_CLOCK,           //  SPI_ClockMask
   //  SPI Struct
-  &_SSPInitStruct
+  .pSSPInitStruct = &_SSPInitStruct
 };
 
 SPI_Obj* pBRD_SPIx = &BRD_SPIx;

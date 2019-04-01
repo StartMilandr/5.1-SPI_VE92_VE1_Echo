@@ -2,16 +2,16 @@
 #include "brdDef.h"
 
 
-// Êîíôèãóðàöèÿ ëèíèé ââîäà-âûâîäà
+// ÐšÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ñ Ð»Ð¸Ð½Ð¸Ð¹ Ð²Ð²Ð¾Ð´Ð°-Ð²Ñ‹Ð²Ð¾Ð´Ð°
 void BRD_SPI_PortInit (SPI_Obj* BRD_SPI)
 {
-  // Ñòðóêòóðà äëÿ èíèöèàëèçàöèè ëèíèé ââîäà-âûâîäà
+  // Ð¡Ñ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð´Ð»Ñ Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ð¸ Ð»Ð¸Ð½Ð¸Ð¹ Ð²Ð²Ð¾Ð´Ð°-Ð²Ñ‹Ð²Ð¾Ð´Ð°
   PORT_InitTypeDef GPIOInitStruct;
 
-  // Ðàçðåøåíèå òàêòèðîâàíèÿ ïîðòà
+  // Ð Ð°Ð·Ñ€ÐµÑˆÐµÐ½Ð¸Ðµ Ñ‚Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ñ Ð¿Ð¾Ñ€Ñ‚Ð°
   RST_CLK_PCLKcmd (BRD_SPI->Port_ClockMask, ENABLE);	
 	
-  // Îáùàÿ êîíôèãóðàöèÿ ëèíèé ââîäà-âûâîäà
+  // ÐžÐ±Ñ‰Ð°Ñ ÐºÐ¾Ð½Ñ„Ð¸Ð³ÑƒÑ€Ð°Ñ†Ð¸Ñ Ð»Ð¸Ð½Ð¸Ð¹ Ð²Ð²Ð¾Ð´Ð°-Ð²Ñ‹Ð²Ð¾Ð´Ð°
   GPIOInitStruct.PORT_PULL_UP   = PORT_PULL_UP_OFF;
   GPIOInitStruct.PORT_PULL_DOWN = PORT_PULL_DOWN_OFF;
   GPIOInitStruct.PORT_PD_SHM    = PORT_PD_SHM_OFF;
@@ -20,7 +20,7 @@ void BRD_SPI_PortInit (SPI_Obj* BRD_SPI)
   GPIOInitStruct.PORT_SPEED     = PORT_SPEED_MAXFAST;
   GPIOInitStruct.PORT_MODE      = PORT_MODE_DIGITAL;
 
-  // Èíèöèàëèçàöèÿ âûâîäîâ
+  // Ð˜Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð²Ñ‹Ð²Ð¾Ð´Ð¾Ð²
   GPIOInitStruct.PORT_Pin     = BRD_SPI->Port_PinsSel;
   GPIOInitStruct.PORT_FUNC    = BRD_SPI->Port_PinsFunc;  
   
@@ -29,25 +29,25 @@ void BRD_SPI_PortInit (SPI_Obj* BRD_SPI)
 
 void BRD_SPI_Init(SPI_Obj* BRD_SPI, uint32_t isMaster)
 {
-  // Òàêòèðîâàíèå
+  // Ð¢Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ
 	RST_CLK_PCLKcmd(BRD_SPI->SPI_ClockMask, ENABLE);	
 	
-  // Äåèíèöèàëèçàöèÿ ìîäóëÿ SSP1
+  // Ð”ÐµÐ¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¼Ð¾Ð´ÑƒÐ»Ñ SSP1
   SSP_DeInit (BRD_SPI->SPIx);
 
-  // Âûáîð ïðåääåëèòåëÿ òàêòîâîé ÷àñòîòû äëÿ ìîäóëÿ SSP1
+  // Ð’Ñ‹Ð±Ð¾Ñ€ Ð¿Ñ€ÐµÐ´Ð´ÐµÐ»Ð¸Ñ‚ÐµÐ»Ñ Ñ‚Ð°ÐºÑ‚Ð¾Ð²Ð¾Ð¹ Ñ‡Ð°ÑÑ‚Ð¾Ñ‚Ñ‹ Ð´Ð»Ñ Ð¼Ð¾Ð´ÑƒÐ»Ñ SSP1
   SSP_BRGInit (BRD_SPI->SPIx, SSP_HCLKdiv1);
 
-  // Âûáîð Ìàñòåð - Âåäîìûé
+  // Ð’Ñ‹Ð±Ð¾Ñ€ ÐœÐ°ÑÑ‚ÐµÑ€ - Ð’ÐµÐ´Ð¾Ð¼Ñ‹Ð¹
   if (isMaster)
     BRD_SPI->pSSPInitStruct->SSP_Mode = SSP_ModeMaster;
   else
     BRD_SPI->pSSPInitStruct->SSP_Mode = SSP_ModeSlave;
 
-  // Èíèöèàëèçàöèÿ ìîäóëÿ SSP1
+  // Ð˜Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ð¼Ð¾Ð´ÑƒÐ»Ñ SSP1
   SSP_Init (BRD_SPI->SPIx, BRD_SPI->pSSPInitStruct);
 
-  // Âêëþ÷åíèå ìîäóëÿ SSP1
+  // Ð’ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð¼Ð¾Ð´ÑƒÐ»Ñ SSP1
   SSP_Cmd (BRD_SPI->SPIx, ENABLE);
 	
 	//	Wait FIFO TX empty
