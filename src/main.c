@@ -46,7 +46,7 @@ int main(void)
   
   
   // Clock
-  BRD_Clock_Init_HSE_PLL(10); // 80MHz
+  BRD_Clock_Init_HSE_PLL(RST_CLK_CPU_PLLmul10); // 80MHz
   
   //  Controls
   BRD_BTNs_Init();
